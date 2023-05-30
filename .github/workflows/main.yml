@@ -21,4 +21,4 @@ jobs:
       - name: 'Download Source'
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ github.TOKEN }}
