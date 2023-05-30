@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rosie.Nutshell.Types.Common;
+namespace Rosie.Nutshell.Types.Internal;
 
 public abstract class PatchedEntity<TEntity, TKey> : IProjection
 {
     protected readonly Dictionary<string, object?> Values = new();
+
+    protected internal PatchedEntity() { }
 
     public TEntity UpdateNullable<TPatchKey, TValue>(TPatchKey key, TValue? value)
         where TPatchKey : PatchKey<TEntity, TValue?>, TKey

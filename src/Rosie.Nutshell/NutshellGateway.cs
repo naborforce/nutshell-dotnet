@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Rosie.Nutshell.Exceptions;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Endpoint;
+using Rosie.Nutshell.Types.Internal;
 using Rosie.Platform.Abstractions.Unions;
 using Rosie.Platform.Factories;
 using Secret = Rosie.Nutshell.Secrets.Nutshell;
@@ -63,7 +64,7 @@ public class NutshellGateway : INutshellGateway
         Uri? requestUri = null)
         where TIn : class
     {
-        if (!new UnionValue(NutshellMethods.UnionType).TrySetValue(method.Name))
+        if (!new UnionValue(NutshellMethods.TypeGuard).TrySetValue(method.Name))
         {
             throw new NutshellApiException($"Invalid method: `{method.Name}`");
         }

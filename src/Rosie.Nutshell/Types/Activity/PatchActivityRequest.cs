@@ -1,5 +1,6 @@
 using System;
 using Rosie.Nutshell.Types.Common;
+using Rosie.Nutshell.Types.Internal;
 
 namespace Rosie.Nutshell.Types.Activity;
 

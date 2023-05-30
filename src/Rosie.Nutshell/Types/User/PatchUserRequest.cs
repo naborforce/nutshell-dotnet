@@ -1,4 +1,5 @@
 using Rosie.Nutshell.Types.Common;
+using Rosie.Nutshell.Types.Internal;
 using Rosie.Nutshell.Types.Lead;
 using Rosie.Nutshell.Types.Team;
 

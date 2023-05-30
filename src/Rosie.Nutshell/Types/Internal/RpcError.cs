@@ -1,3 +1,3 @@
-namespace Rosie.Nutshell.Types.Common;
+namespace Rosie.Nutshell.Types.Internal;
 
 internal record RpcError(string Message, int Code, object? Data = null);

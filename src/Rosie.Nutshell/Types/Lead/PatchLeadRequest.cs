@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Rosie.Nutshell.Types.Common;
-using Rosie.Nutshell.Types.Competitor;
+using Rosie.Nutshell.Types.Internal;
 using Rosie.Nutshell.Types.Product;
 
 namespace Rosie.Nutshell.Types.Lead;
@@ -22,7 +22,7 @@ public class PatchLeadRequest : PatchedEntity<PatchLeadRequest, PatchLeadRequest
         public static readonly TypedPatchKey<NutshellEntityRevision[]> Contacts = new("contacts");
         public static readonly TypedPatchKey<NutshellEntityRevision[]> Accounts = new("accounts");
         public static readonly TypedPatchKey<NutshellProduct[]> Products = new("products");
-        public static readonly TypedPatchKey<NutshellCompetitor[]> Competitors = new("competitors");
+        public static readonly TypedPatchKey<NutshellEntityStub[]> Competitors = new("competitors");
         public static readonly TypedPatchKey<NutshellEntityRevision[]> Sources = new("sources");
         public static readonly TypedPatchKey<string?> Note = new("note");
         public static readonly TypedPatchKey<Dictionary<string, string>> CustomFields = new("customFields");

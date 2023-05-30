@@ -2,9 +2,9 @@ using System.Linq;
 using Rosie.Platform.Abstractions.Unions;
 using Rosie.Platform.Extensions;
 
-namespace Rosie.Nutshell.Types.Common;
+namespace Rosie.Nutshell.Types.Internal;
 
-public static class UnionTypes
+internal static class UnionTypes
 {
     public static readonly UnionType Entity = UnionType.Create(s
         => s.DisallowNull()
