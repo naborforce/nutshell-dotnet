@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell", "src\Rosie.Nutshell\Rosie.Nutshell.csproj", "{ADEDF1F6-3DE3-4612-AE46-54CBF97C7BE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.Actions", "actions\Rosie.Nutshell.Actions.csproj", "{A0694E6B-D7AC-4ACA-961C-D04AB162B5FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.Workflows", ".github\workflows\Rosie.Nutshell.Workflows.csproj", "{F6721509-DAC2-40E1-AE78-756F04907809}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADEDF1F6-3DE3-4612-AE46-54CBF97C7BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEDF1F6-3DE3-4612-AE46-54CBF97C7BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEDF1F6-3DE3-4612-AE46-54CBF97C7BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEDF1F6-3DE3-4612-AE46-54CBF97C7BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0694E6B-D7AC-4ACA-961C-D04AB162B5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0694E6B-D7AC-4ACA-961C-D04AB162B5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0694E6B-D7AC-4ACA-961C-D04AB162B5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0694E6B-D7AC-4ACA-961C-D04AB162B5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6721509-DAC2-40E1-AE78-756F04907809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6721509-DAC2-40E1-AE78-756F04907809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6721509-DAC2-40E1-AE78-756F04907809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6721509-DAC2-40E1-AE78-756F04907809}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
