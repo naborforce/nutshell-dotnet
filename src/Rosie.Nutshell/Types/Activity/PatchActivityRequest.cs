@@ -1,3 +1,4 @@
+using System;
 using Rosie.Nutshell.Types.Common;
 
 namespace Rosie.Nutshell.Types.Activity;

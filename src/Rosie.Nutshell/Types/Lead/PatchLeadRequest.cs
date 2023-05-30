@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Competitor;
 using Rosie.Nutshell.Types.Product;

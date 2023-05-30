@@ -1,3 +1,4 @@
+using System.Linq;
 using Rosie.Nutshell.Types.Account;
 using Rosie.Nutshell.Types.Activity;
 using Rosie.Nutshell.Types.Common;

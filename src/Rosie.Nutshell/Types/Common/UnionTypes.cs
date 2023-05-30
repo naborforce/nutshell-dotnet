@@ -1,3 +1,4 @@
+using System.Linq;
 using Rosie.Platform.Abstractions.Unions;
 using Rosie.Platform.Extensions;
 

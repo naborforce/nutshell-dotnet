@@ -1,3 +1,5 @@
+using System;
+
 namespace Rosie.Nutshell.Exceptions;
 
 public sealed class NutshellApiException : Exception

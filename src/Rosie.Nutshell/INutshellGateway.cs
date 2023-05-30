@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Rosie.Nutshell.Types.Common;
 
 namespace Rosie.Nutshell;
