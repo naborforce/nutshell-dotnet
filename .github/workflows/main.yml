@@ -54,7 +54,7 @@ jobs:
           git-tag-sources: true
           git-add-commit: true
           git-push-changes: true
-          github-token: ${{ github.TOKEN }}
+          github-token: ${{ secrets.CICD }}
 
       - name: Push Packages to Nuget.org
         uses: "./naborforce/capabilities-pipelines/dotnet-nuget-push"
