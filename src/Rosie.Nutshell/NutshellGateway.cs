@@ -1,27 +1,25 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Rosie.Nutshell.Exceptions;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Endpoint;
 using Rosie.Nutshell.Types.Internal;
+using Rosie.Platform.Abstractions.Enumerations;
 using Rosie.Platform.Abstractions.Unions;
 using Rosie.Platform.Factories;
 using Secret = Rosie.Nutshell.Secrets.Nutshell;
 
 namespace Rosie.Nutshell;
 
-public class NutshellGateway : INutshellGateway
+internal class NutshellGateway : INutshellGateway
 {
     private readonly Secret secret;
     private readonly IHttpClientFactory httpClientFactory;
     private readonly ILogger<NutshellGateway> logger;
     private readonly AsyncLazy<HttpClient> client;
-    private static readonly Uri endpointDiscoverUrl = new Uri("https://api.nutshell.com/v1/json");
+    private static readonly Uri endpointDiscoverUrl = new("https://api.nutshell.com/v1/json");
 
     public NutshellGateway(Secret secret, IHttpClientFactory httpClientFactory, ILogger<NutshellGateway> logger)
     {
@@ -47,7 +45,13 @@ public class NutshellGateway : INutshellGateway
     {
         var request = new GetEndpointRequest(username);
         using var httpClient = httpClientFactory.CreateClient(nameof(NutshellGateway));
-        var endpoint = await CallAsync(NutshellMethods.GetApiForUsername, request, httpClient, endpointDiscoverUrl);
+        
+        var endpoint = await ExecuteRemoteProcedureCallAsync(
+            NutshellMethods.GetApiForUsername,
+            request, 
+            httpClient, 
+            endpointDiscoverUrl);
+        
         return new Uri($"https://{endpoint.Api}/api/v1/json");
     }
 
@@ -55,11 +59,17 @@ public class NutshellGateway : INutshellGateway
 
     public async Task<TOut> CallAsync<TOut, TIn>(NutshellMethods<TOut, TIn> method, TIn input)
         where TIn : class
-        => await CallAsync(method, input, await client.Value);
+        => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
 
-    private async Task<TOut> CallAsync<TOut, TIn>(
+    public async Task<TOut> CallAsync<TOut>(NutshellFunc<TOut> method)
+        => await ExecuteRemoteProcedureCallAsync(method, null, await client.Value);
+
+    public async Task CallAsync<TIn>(NutshellAction<TIn> method, TIn input) where TIn : class
+        => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
+
+    private async Task<TOut> ExecuteRemoteProcedureCallAsync<TOut, TIn>(
         NutshellMethods<TOut, TIn> method,
-        TIn input,
+        TIn? input,
         HttpClient httpClient,
         Uri? requestUri = null)
         where TIn : class
@@ -69,23 +79,7 @@ public class NutshellGateway : INutshellGateway
             throw new NutshellApiException($"Invalid method: `{method.Name}`");
         }
 
-        var payload = new
-        {
-            method = method.Name,
-            @params = input,
-            id = GenerateRequestId()
-        };
-
-        var request = new HttpRequestMessage();
-
-        if (requestUri is not null)
-        {
-            request.RequestUri = requestUri;
-        }
-
-        request.Method = HttpMethod.Post;
-        var data = payload is IProjection projection ? projection.GetProjection() : payload;
-        request.Content = JsonContent.Create(data);
+        var request = CreateRequest(method, input, requestUri);
         var response = await httpClient.SendAsync(request);
 
         if (!response.IsSuccessStatusCode)
@@ -109,5 +103,29 @@ public class NutshellGateway : INutshellGateway
         }
 
         return decoded.Result;
+    }
+
+    private static HttpRequestMessage CreateRequest(
+        Enumeration method,
+        object? input,
+        Uri? requestUri)
+    {
+        var payload = new
+        {
+            method = method.Name,
+            @params = input is IProjection projection ? projection.GetProjection() : input,
+            id = GenerateRequestId()
+        };
+
+        var request = new HttpRequestMessage();
+
+        if (requestUri is not null)
+        {
+            request.RequestUri = requestUri;
+        }
+
+        request.Method = HttpMethod.Post;
+        request.Content = JsonContent.Create(payload);
+        return request;
     }
 }

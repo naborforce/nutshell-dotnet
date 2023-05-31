@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Internal;
 using Rosie.Nutshell.Types.Product;

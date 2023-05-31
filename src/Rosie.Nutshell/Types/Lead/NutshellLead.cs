@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Rosie.Nutshell.Types.Account;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Contact;

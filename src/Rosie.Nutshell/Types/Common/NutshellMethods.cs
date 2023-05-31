@@ -7,3 +7,17 @@ public class NutshellMethods<TResponse, TRequest> : NutshellMethods
     {
     }
 }
+
+public class NutshellFunc<TResponse> : NutshellMethods<TResponse, object>
+{
+    internal NutshellFunc(string name) : base(name)
+    {
+    }
+}
+
+public class NutshellAction<TRequest> : NutshellMethods<object, TRequest> where TRequest : class
+{
+    internal NutshellAction(string name) : base(name)
+    {
+    }
+}

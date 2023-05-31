@@ -1,4 +1,3 @@
-using System;
 using System.Security.Policy;
 using Rosie.Nutshell.Types.Account;
 using Rosie.Nutshell.Types.Channels;

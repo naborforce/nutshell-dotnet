@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Rosie.Nutshell.Types.Internal;
 
 public abstract class PatchedEntity<TEntity, TKey> : IProjection

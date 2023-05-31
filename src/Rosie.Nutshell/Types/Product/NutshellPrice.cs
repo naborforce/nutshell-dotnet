@@ -1,5 +1,3 @@
-using System;
-
 namespace Rosie.Nutshell.Types.Product;
 
 public record NutshellPrice(string Currency, decimal Amount);

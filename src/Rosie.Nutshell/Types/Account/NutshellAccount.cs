@@ -1,4 +1,3 @@
-using System;
 using Rosie.Nutshell.Types.Channels;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Contact;
