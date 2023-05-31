@@ -6,15 +6,15 @@ supported by Nutshell.  It is provided as-is, and is not guaranteed to work.  Us
 
 
 ## Installation
-Install Nutshell Dotnet using NuGet:
+Install Rosie.Nutshell using NuGet:
 
 ```ps
-Install-Package Mapster
+Install-Package Rosie.Nutshell
 ```
 
-Or use the .NET core CLI to install Mapster:
+Or use the .NET core CLI to install Rosie.Nutshell:
 ```bash
-dotnet add package Mapster
+dotnet add package Rosie.Nutshell
 ```
 
 ## Usage
