@@ -7,9 +7,9 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    <PackageVersion>0.2.0</PackageVersion>
-    <Version>0.2.0</Version>
-    <AssemblyVersion>0.2.0</AssemblyVersion>
+    <PackageVersion>0.3.0</PackageVersion>
+    <Version>0.3.0</Version>
+    <AssemblyVersion>0.3.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
