@@ -45,8 +45,8 @@ jobs:
         uses: './naborforce/capabilities-pipelines/dotnet-build-test-analyze'
         with:
           path: 'Rosie.Nutshell.sln'
-#          sonar-project-key: 'nutshell-dotnet'
-#          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          sonar-project-key: 'nutshell-dotnet'
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
 
       - name: Save Package Version
         uses: './naborforce/capabilities-pipelines/version-bump'
