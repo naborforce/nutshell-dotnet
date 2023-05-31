@@ -38,32 +38,28 @@ jobs:
         uses: './naborforce/capabilities-pipelines/version-bump'
         with:
           package-file: 'package.json'
-          apply-files: |
-            src/Rosie.Nutshell/Rosie.Nutshell.csproj
+          search-files: '*.csproj'
           command: 'bump'
-          nuget-source-user: ${{ secrets.USER }}
-          nuget-source-token: ${{ secrets.TOKEN }}
-          nuget-source-url: 'https://nuget.pkg.github.com/naborforce/index.json'
-
-#      - name: Save Package Version
-#        uses: './naborforce/capabilities-pipelines/version-bump'
-#        with:
-#          git-tag-sources: true
-#          git-add-commit: true
-#          git-push-changes: true
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Build, Test, and Analyze
-#        uses: './naborforce/capabilities-pipelines/dotnet-build'
-#        with:
-#          path: 'src/Rosie.Platform.sln'
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          token: ${{ secrets.TOKEN }}
-#          sonar-project-key: 'enablement-platform'
+          
+      - name: Build, Test, and Analyze
+        uses: './naborforce/capabilities-pipelines/dotnet-build'
+        with:
+          path: 'src/Rosie.Platform.sln'
+          github-token: ${{ github.TOKEN }}
+          token: ${{ github.TOKEN }}
+#          sonar-project-key: 'nutshell-dotnet'
 #          sonar-token: ${{ secrets.SONAR_TOKEN }}
-#
-#      - name: Push Packages to Nuget.org
-#        uses: "./naborforce/capabilities-pipelines/dotnet-nuget-push"
-#        with:
-#          nuget-source-name: 'nuget.org'
-#          nuget-source-token: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Save Package Version
+        uses: './naborforce/capabilities-pipelines/version-bump'
+        with:
+          git-tag-sources: true
+          git-add-commit: true
+          git-push-changes: true
+          github-token: ${{ github.TOKEN }}
+
+      - name: Push Packages to Nuget.org
+        uses: "./naborforce/capabilities-pipelines/dotnet-nuget-push"
+        with:
+          nuget-source-name: 'nuget.org'
+          nuget-source-token: ${{ secrets.NUGET_API_KEY }}
