@@ -17,6 +17,30 @@
     <PackageReference Include="Rosie.Platform" Version="7.75.2" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <!-- Properties related to NuGet packaging: -->
+    <IsPackable>True</IsPackable>
+    <PackageId>Rosie.Nutshell</PackageId>
+    <Title>Nutshell Dotnet (from Naborforce)</Title>
+    <Description>
+      This is a package that contains the Rosie Nutshell Dotnet library.  Produced by @naborforce, we created this package
+      to assist with managing our data stored in the Nutshell CRM. This package is not affiliated with Nutshell, and is not 
+      supported by Nutshell.  It is provided as-is, and is not guaranteed to work.  Use at your own risk.
+    </Description>
+    <PackageReleaseNotes>A changelog is available at https://github.com/naborforce/nutshell-dotnet/releases.</PackageReleaseNotes>
+    <Authors>Naborforce, Inc</Authors>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <NoPackageAnalysis>True</NoPackageAnalysis>
+    <PackageOutputPath>$(OutputDirectory)</PackageOutputPath>
+    <PackageTags>nutshelll;crm;naborforce;rosie</PackageTags>
+    <PackageProjectUrl>https://github.com/naborforce/nutshell-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/naborforce/nutshell-dotnet</RepositoryUrl>
+    <IncludeSymbols>false</IncludeSymbols>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="..\..\LICENSE">
       <Link>LICENSE</Link>
@@ -27,6 +51,8 @@
     <Content Include="..\..\README.md">
       <Link>README.md</Link>
     </Content>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="logo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

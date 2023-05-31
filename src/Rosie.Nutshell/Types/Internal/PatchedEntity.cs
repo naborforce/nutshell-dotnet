@@ -6,7 +6,7 @@ public abstract class PatchedEntity<TEntity, TKey> : IProjection
 
     protected internal PatchedEntity() { }
 
-    public TEntity UpdateNullable<TPatchKey, TValue>(TPatchKey key, TValue? value)
+    public TEntity UpdateNullable<TPatchKey, TValue>(TPatchKey key, TValue value)
         where TPatchKey : PatchKey<TEntity, TValue?>, TKey
     {
         Values[key.Name] = value;

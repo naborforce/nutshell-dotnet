@@ -13,17 +13,17 @@ public interface INutshellGateway
     /// <summary>
     /// Calls a Nutshell API method with an input and expects an output.
     /// </summary>
-    /// <param name="method">Discover methods as static fields here: <see cref="NutshellMethods"/></param>
+    /// <param name="method">Discover methods as static fields here: <see cref="NutshellRpc"/></param>
     /// <param name="input">The input to the method.</param>
     /// <typeparam name="TOut">The expected output type.</typeparam>
     /// <typeparam name="TIn">The input type.</typeparam>
     /// <returns></returns>
-    Task<TOut> CallAsync<TOut, TIn>(NutshellMethods<TOut, TIn> method, TIn input) where TIn : class;
+    Task<TOut> CallAsync<TOut, TIn>(NutshellRpc<TOut, TIn> method, TIn input) where TIn : class;
 
     /// <summary>
     /// Calls a Nutshell API method without any input and expects an output.
     /// </summary>
-    /// <param name="method">Discover methods as static fields here: <see cref="NutshellMethods"/></param>
+    /// <param name="method">Discover methods as static fields here: <see cref="NutshellRpc"/></param>
     /// <typeparam name="TOut">The expected output type.</typeparam>
     /// <returns></returns>
     Task<TOut> CallAsync<TOut>(NutshellFunc<TOut> method);
@@ -31,7 +31,7 @@ public interface INutshellGateway
     /// <summary>
     /// Calls a Nutshell API method with an input and expects no output.
     /// </summary>
-    /// <param name="method">Discover methods as static fields here: <see cref="NutshellMethods"/></param>
+    /// <param name="method">Discover methods as static fields here: <see cref="NutshellRpc"/></param>
     /// <param name="input">The input to the method.</param>
     /// <typeparam name="TIn">The input type.</typeparam>
     /// <returns></returns>

@@ -47,7 +47,7 @@ internal class NutshellGateway : INutshellGateway
         using var httpClient = httpClientFactory.CreateClient(nameof(NutshellGateway));
         
         var endpoint = await ExecuteRemoteProcedureCallAsync(
-            NutshellMethods.GetApiForUsername,
+            NutshellRpc.GetApiForUsername,
             request, 
             httpClient, 
             endpointDiscoverUrl);
@@ -57,7 +57,7 @@ internal class NutshellGateway : INutshellGateway
 
     private static string GenerateRequestId() => Guid.NewGuid().ToString("N");
 
-    public async Task<TOut> CallAsync<TOut, TIn>(NutshellMethods<TOut, TIn> method, TIn input)
+    public async Task<TOut> CallAsync<TOut, TIn>(NutshellRpc<TOut, TIn> method, TIn input)
         where TIn : class
         => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
 
@@ -68,13 +68,13 @@ internal class NutshellGateway : INutshellGateway
         => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
 
     private async Task<TOut> ExecuteRemoteProcedureCallAsync<TOut, TIn>(
-        AbstractNutshellMethods<TOut, TIn> method,
+        AbstractNutshellRpc<TOut, TIn> method,
         TIn? input,
         HttpClient httpClient,
         Uri? requestUri = null)
         where TIn : class
     {
-        if (!new UnionValue(NutshellMethods.TypeGuard).TrySetValue(method.Name))
+        if (!new UnionValue(NutshellRpc.TypeGuard).TrySetValue(method.Name))
         {
             throw new NutshellApiException($"Invalid method: `{method.Name}`");
         }
