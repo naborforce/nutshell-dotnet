@@ -33,8 +33,8 @@ jobs:
         if: inputs.dotnet-version != ''
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.x'
-#
+          dotnet-version: '7.0.x'
+
 #      - name: Increment Package Version
 #        uses: './naborforce/capabilities-pipelines/version-bump'
 #        with:
@@ -45,7 +45,7 @@ jobs:
 #          nuget-source-user: ${{ secrets.USER }}
 #          nuget-source-token: ${{ secrets.TOKEN }}
 #          nuget-source-url: 'https://nuget.pkg.github.com/naborforce/index.json'
-#
+
 #      - name: Save Package Version
 #        uses: './naborforce/capabilities-pipelines/version-bump'
 #        with:
