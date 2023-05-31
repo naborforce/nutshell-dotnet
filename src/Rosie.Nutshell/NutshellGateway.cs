@@ -68,7 +68,7 @@ internal class NutshellGateway : INutshellGateway
         => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
 
     private async Task<TOut> ExecuteRemoteProcedureCallAsync<TOut, TIn>(
-        NutshellMethods<TOut, TIn> method,
+        AbstractNutshellMethods<TOut, TIn> method,
         TIn? input,
         HttpClient httpClient,
         Uri? requestUri = null)
