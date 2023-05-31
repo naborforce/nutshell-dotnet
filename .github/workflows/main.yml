@@ -42,11 +42,9 @@ jobs:
           command: 'bump'
           
       - name: Build, Test, and Analyze
-        uses: './naborforce/capabilities-pipelines/dotnet-build'
+        uses: './naborforce/capabilities-pipelines/dotnet-build-test-analyze'
         with:
-          path: 'src/Rosie.Platform.sln'
-          github-token: ${{ github.TOKEN }}
-          token: ${{ github.TOKEN }}
+          path: 'Rosie.Nutshell.sln'
 #          sonar-project-key: 'nutshell-dotnet'
 #          sonar-token: ${{ secrets.SONAR_TOKEN }}
 
