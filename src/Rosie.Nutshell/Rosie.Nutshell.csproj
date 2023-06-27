@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-    <PackageReference Include="Rosie.Platform" Version="7.90.4" />
+    <PackageReference Include="Rosie.Platform" Version="7.91.2" />
   </ItemGroup>
 
   <PropertyGroup>
