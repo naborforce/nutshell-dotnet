@@ -9,11 +9,11 @@ internal static class UnionTypes
         => s.DisallowNull()
             .DisallowAllTypeValues()
             .WithoutTypeConstraints()
-            .AllowValues(values: entities.Cast<object>().ToArray())
-            .WithValueConstraints(v => v?.ToString()?.IsIn(entities) == true)
+            .AllowValues(values: _entities.Cast<object>().ToArray())
+            .WithValueConstraints(v => v?.ToString()?.IsIn(_entities) == true)
             .Build());
 
-    private static readonly string[] entities =
+    private static readonly string[] _entities =
     {
         "Accounts",
         "Activities",

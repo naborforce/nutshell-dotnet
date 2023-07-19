@@ -6,12 +6,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.Actions", "a
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.Workflows", ".github\workflows\Rosie.Nutshell.Workflows.csproj", "{F6721509-DAC2-40E1-AE78-756F04907809}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.IntegrationTests", "Rosie.Nutshell.IntegrationTests\Rosie.Nutshell.IntegrationTests.csproj", "{7D4200C7-E249-4EC9-8B07-C19E947B0D6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevOps", "DevOps", "{0A6BF034-7558-4B0C-920D-E6751AFDF030}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4CA71137-3936-43FB-82D7-48E6D4A8DC1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.Test.Utilities", "Rosie.Nutshell.Test.Utilities\Rosie.Nutshell.Test.Utilities.csproj", "{68D21A44-05AB-47EB-8929-FDDB38468F4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rosie.Nutshell.UnitTests", "Rosie.Nutshell.UnitTests\Rosie.Nutshell.UnitTests.csproj", "{305F50DA-0A59-489A-8877-D845A796D85F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A0694E6B-D7AC-4ACA-961C-D04AB162B5FB} = {0A6BF034-7558-4B0C-920D-E6751AFDF030}
+		{F6721509-DAC2-40E1-AE78-756F04907809} = {0A6BF034-7558-4B0C-920D-E6751AFDF030}
+		{7D4200C7-E249-4EC9-8B07-C19E947B0D6F} = {4CA71137-3936-43FB-82D7-48E6D4A8DC1A}
+		{305F50DA-0A59-489A-8877-D845A796D85F} = {4CA71137-3936-43FB-82D7-48E6D4A8DC1A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ADEDF1F6-3DE3-4612-AE46-54CBF97C7BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,5 +40,17 @@ Global
 		{F6721509-DAC2-40E1-AE78-756F04907809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6721509-DAC2-40E1-AE78-756F04907809}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6721509-DAC2-40E1-AE78-756F04907809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4200C7-E249-4EC9-8B07-C19E947B0D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4200C7-E249-4EC9-8B07-C19E947B0D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4200C7-E249-4EC9-8B07-C19E947B0D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4200C7-E249-4EC9-8B07-C19E947B0D6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D21A44-05AB-47EB-8929-FDDB38468F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D21A44-05AB-47EB-8929-FDDB38468F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D21A44-05AB-47EB-8929-FDDB38468F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D21A44-05AB-47EB-8929-FDDB38468F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305F50DA-0A59-489A-8877-D845A796D85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305F50DA-0A59-489A-8877-D845A796D85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305F50DA-0A59-489A-8877-D845A796D85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305F50DA-0A59-489A-8877-D845A796D85F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

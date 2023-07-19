@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-    <PackageReference Include="Rosie.Platform" Version="7.91.2" />
+    <PackageReference Include="Rosie.Platform" Version="7.92.0" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -42,6 +42,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\..\.gitignore">
+      <Link>.gitignore</Link>
+    </Content>
     <Content Include="..\..\LICENSE">
       <Link>LICENSE</Link>
     </Content>
@@ -51,8 +54,14 @@
     <Content Include="..\..\README.md">
       <Link>README.md</Link>
     </Content>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-    <None Include="logo.png" Pack="true" PackagePath="\"/>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="logo.png" Pack="true" PackagePath="\" />
+    <Content Include=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

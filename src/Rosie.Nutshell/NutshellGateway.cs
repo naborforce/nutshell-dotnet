@@ -1,13 +1,12 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
-using Microsoft.Extensions.Logging;
 using Rosie.Nutshell.Exceptions;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Endpoint;
 using Rosie.Nutshell.Types.Internal;
+using Rosie.Platform;
 using Rosie.Platform.Abstractions.Enumerations;
-using Rosie.Platform.Abstractions.Unions;
 using Rosie.Platform.Factories;
 using Secret = Rosie.Nutshell.Secrets.Nutshell;
 
@@ -15,26 +14,26 @@ namespace Rosie.Nutshell;
 
 internal class NutshellGateway : INutshellGateway
 {
-    private readonly Secret secret;
-    private readonly IHttpClientFactory httpClientFactory;
-    private readonly ILogger<NutshellGateway> logger;
-    private readonly AsyncLazy<HttpClient> client;
-    private static readonly Uri endpointDiscoverUrl = new("https://api.nutshell.com/v1/json");
+    private readonly Secret _secret;
+    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly AsyncLazy<HttpClient> _client;
+    private static readonly Uri _endpointDiscoverUrl = new(Constants.DiscoveryEndpointUri);
 
-    public NutshellGateway(Secret secret, IHttpClientFactory httpClientFactory, ILogger<NutshellGateway> logger)
+    static NutshellGateway() => DotEnv.Load(".env");
+    
+    public NutshellGateway(Secret? secret, IHttpClientFactory httpClientFactory)
     {
-        this.secret = secret;
-        this.httpClientFactory = httpClientFactory;
-        this.logger = logger;
+        _secret = secret ?? new Secret();
+        _httpClientFactory = httpClientFactory;
 
-        client = new AsyncLazy<HttpClient>(CreateHttpClientAsync);
+        _client = new AsyncLazy<HttpClient>(CreateHttpClientAsync);
     }
 
     private async Task<HttpClient> CreateHttpClientAsync()
     {
-        var httpClient = httpClientFactory.CreateClient(nameof(NutshellGateway));
-        httpClient.BaseAddress = await GetApiEndpointForUserAsync(secret.Username);
-        var authData = Encoding.UTF8.GetBytes($"{secret.Username}:{secret.ApiKey}");
+        var httpClient = _httpClientFactory.CreateClient(nameof(NutshellGateway));
+        httpClient.BaseAddress = await GetApiEndpointForUserAsync(_secret.Username);
+        var authData = Encoding.UTF8.GetBytes($"{_secret.Username}:{_secret.ApiKey}");
         var basicAuthParameterValue = Convert.ToBase64String(authData);
         var authHeader = new AuthenticationHeaderValue("Basic", basicAuthParameterValue);
         httpClient.DefaultRequestHeaders.Authorization = authHeader;
@@ -44,13 +43,13 @@ internal class NutshellGateway : INutshellGateway
     private async Task<Uri> GetApiEndpointForUserAsync(string username)
     {
         var request = new GetEndpointRequest(username);
-        using var httpClient = httpClientFactory.CreateClient(nameof(NutshellGateway));
+        using var httpClient = _httpClientFactory.CreateClient(nameof(NutshellGateway));
         
         var endpoint = await ExecuteRemoteProcedureCallAsync(
             NutshellRpc.GetApiForUsername,
             request, 
             httpClient, 
-            endpointDiscoverUrl);
+            _endpointDiscoverUrl);
         
         return new Uri($"https://{endpoint.Api}/api/v1/json");
     }
@@ -59,13 +58,13 @@ internal class NutshellGateway : INutshellGateway
 
     public async Task<TOut> CallAsync<TOut, TIn>(NutshellRpc<TOut, TIn> method, TIn input)
         where TIn : class
-        => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
+        => await ExecuteRemoteProcedureCallAsync(method, input, await _client.Value);
 
     public async Task<TOut> CallAsync<TOut>(NutshellFunc<TOut> method)
-        => await ExecuteRemoteProcedureCallAsync(method, null, await client.Value);
+        => await ExecuteRemoteProcedureCallAsync(method, null, await _client.Value);
 
     public async Task CallAsync<TIn>(NutshellAction<TIn> method, TIn input) where TIn : class
-        => await ExecuteRemoteProcedureCallAsync(method, input, await client.Value);
+        => await ExecuteRemoteProcedureCallAsync(method, input, await _client.Value);
 
     private async Task<TOut> ExecuteRemoteProcedureCallAsync<TOut, TIn>(
         AbstractNutshellRpc<TOut, TIn> method,
@@ -74,10 +73,10 @@ internal class NutshellGateway : INutshellGateway
         Uri? requestUri = null)
         where TIn : class
     {
-        if (!new UnionValue(NutshellRpc.TypeGuard).TrySetValue(method.Name))
-        {
-            throw new NutshellApiException($"Invalid method: `{method.Name}`");
-        }
+        // if (!new UnionValue(NutshellRpc.TypeGuard).TrySetValue(method.Name))
+        // {
+        //     throw new NutshellApiException($"Invalid method: `{method.Name}`");
+        // }
 
         var request = CreateRequest(method, input, requestUri);
         var response = await httpClient.SendAsync(request);

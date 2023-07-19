@@ -6,11 +6,11 @@ namespace Rosie.Nutshell;
 
 public class Example
 {
-    private readonly INutshellGateway nutshellGateway;
+    private readonly INutshellGateway _nutshellGateway;
 
     public Example(INutshellGateway nutshellGateway)
     {
-        this.nutshellGateway = nutshellGateway;
+        _nutshellGateway = nutshellGateway;
     }
 
     public async Task Run()
@@ -22,7 +22,7 @@ public class Example
             .UpdateNullable(PatchLeadRequest.Keys.Confidence, (int?)80)
             .Update(PatchLeadRequest.Keys.Tags, new[] { "tag1", "tag2" });
 
-        var createdLead = await nutshellGateway.CallAsync(NutshellRpc.NewLead, lead);
+        var createdLead = await _nutshellGateway.CallAsync(NutshellRpc.Leads.NewLead, lead);
         Console.WriteLine(createdLead.ToJson());
     }
 }
