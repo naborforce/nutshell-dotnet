@@ -14,4 +14,10 @@
       <ProjectReference Include="..\src\Rosie.Nutshell\Rosie.Nutshell.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update=".env">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
