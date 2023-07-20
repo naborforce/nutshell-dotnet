@@ -8,9 +8,17 @@ public class Example
 {
     private readonly INutshellGateway _nutshellGateway;
 
+    // this is a typical constructor for a class that uses dependency injection
     public Example(INutshellGateway nutshellGateway)
     {
         _nutshellGateway = nutshellGateway;
+    }
+    
+    // you can alternatively use the static method to create a NutshellGateway
+    public static Example CreateExample()
+    {
+        var nutshellGateway = NutshellGatewayFactory.Create();
+        return new Example(nutshellGateway);
     }
 
     public async Task Run()

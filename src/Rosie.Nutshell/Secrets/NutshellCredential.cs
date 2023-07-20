@@ -8,14 +8,14 @@ namespace Rosie.Nutshell.Secrets;
 /// API key.  The environment variables are NUTSHELL_USERNAME and NUTSHELL_API_KEY, respectively.  You can also specify
 /// those two environment variables in a .env file in the root of your project.
 /// </summary>
-public record Nutshell
+public record NutshellCredential
 {
-    static Nutshell() => DotEnv.Load(".env");
+    static NutshellCredential() => DotEnv.Load(".env");
     
     /// <summary>
     /// This constructor requires a username and an API key.
     /// </summary>
-    public Nutshell(string? username, string? apiKey)
+    public NutshellCredential(string? username, string? apiKey)
     {
         ArgumentNullException.ThrowIfNull(username, nameof(username));
         ArgumentNullException.ThrowIfNull(apiKey, nameof(apiKey));
@@ -32,7 +32,7 @@ public record Nutshell
     /// NUTSHELL_USERNAME and NUTSHELL_API_KEY, respectively.  You can also specify those two environment variables in
     /// a .env file in the root of your project.
     /// </summary>
-    public Nutshell() : this(
+    public NutshellCredential() : this(
         Environment.GetEnvironmentVariable("NUTSHELL_USERNAME"),
         Environment.GetEnvironmentVariable("NUTSHELL_API_KEY"))
     {

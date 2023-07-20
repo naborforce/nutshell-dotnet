@@ -2,28 +2,28 @@
 using System.Net.Http.Json;
 using System.Text;
 using Rosie.Nutshell.Exceptions;
+using Rosie.Nutshell.Secrets;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Endpoint;
 using Rosie.Nutshell.Types.Internal;
 using Rosie.Platform;
 using Rosie.Platform.Abstractions.Enumerations;
 using Rosie.Platform.Factories;
-using Secret = Rosie.Nutshell.Secrets.Nutshell;
 
 namespace Rosie.Nutshell;
 
 internal class NutshellGateway : INutshellGateway
 {
-    private readonly Secret _secret;
+    private readonly NutshellCredential _secret;
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly AsyncLazy<HttpClient> _client;
     private static readonly Uri _endpointDiscoverUrl = new(Constants.DiscoveryEndpointUri);
 
     static NutshellGateway() => DotEnv.Load(".env");
-    
-    public NutshellGateway(Secret? secret, IHttpClientFactory httpClientFactory)
+
+    public NutshellGateway(NutshellCredential? secret, IHttpClientFactory httpClientFactory)
     {
-        _secret = secret ?? new Secret();
+        _secret = secret ?? new NutshellCredential();
         _httpClientFactory = httpClientFactory;
 
         _client = new AsyncLazy<HttpClient>(CreateHttpClientAsync);
@@ -44,13 +44,13 @@ internal class NutshellGateway : INutshellGateway
     {
         var request = new GetEndpointRequest(username);
         using var httpClient = _httpClientFactory.CreateClient(nameof(NutshellGateway));
-        
+
         var endpoint = await ExecuteRemoteProcedureCallAsync(
             NutshellRpc.GetApiForUsername,
-            request, 
-            httpClient, 
+            request,
+            httpClient,
             _endpointDiscoverUrl);
-        
+
         return new Uri($"https://{endpoint.Api}/api/v1/json");
     }
 
@@ -73,11 +73,6 @@ internal class NutshellGateway : INutshellGateway
         Uri? requestUri = null)
         where TIn : class
     {
-        // if (!new UnionValue(NutshellRpc.TypeGuard).TrySetValue(method.Name))
-        // {
-        //     throw new NutshellApiException($"Invalid method: `{method.Name}`");
-        // }
-
         var request = CreateRequest(method, input, requestUri);
         var response = await httpClient.SendAsync(request);
 

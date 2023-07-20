@@ -6,7 +6,7 @@ namespace Rosie.Nutshell.Test.Utilities;
 
 public abstract class NutshellTestContainer : TestContainer.ForSubject<INutshellGateway>
 {
-    public Secrets.Nutshell Secret { get; set; } = new();
+    public Secrets.NutshellCredential Secret { get; set; } = new();
 
     private static readonly IServiceProvider _serviceProvider;
 

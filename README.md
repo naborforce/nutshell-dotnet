@@ -48,11 +48,19 @@ namespace Rosie.Nutshell;
 
 public class Example
 {
-    private readonly INutshellGateway nutshellGateway;
+    private readonly INutshellGateway _nutshellGateway;
 
+    // this is a typical constructor for a class that uses dependency injection
     public Example(INutshellGateway nutshellGateway)
     {
-        this.nutshellGateway = nutshellGateway;
+        _nutshellGateway = nutshellGateway;
+    }
+    
+    // you can alternatively use the static method to create a NutshellGateway
+    public static Example CreateExample()
+    {
+        var nutshellGateway = NutshellGatewayFactory.Create();
+        return new Example(nutshellGateway);
     }
 
     public async Task Run()
@@ -64,7 +72,7 @@ public class Example
             .UpdateNullable(PatchLeadRequest.Keys.Confidence, (int?)80)
             .Update(PatchLeadRequest.Keys.Tags, new[] { "tag1", "tag2" });
 
-        var createdLead = await nutshellGateway.CallAsync(NutshellRpc.NewLead, lead);
+        var createdLead = await _nutshellGateway.CallAsync(NutshellRpc.Leads.NewLead, lead);
         Console.WriteLine(createdLead.ToJson());
     }
 }
