@@ -1,5 +1,3 @@
-using Rosie.Platform;
-
 namespace Rosie.Nutshell.Secrets;
 
 /// <summary>

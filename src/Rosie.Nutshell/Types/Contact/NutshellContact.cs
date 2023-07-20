@@ -1,4 +1,3 @@
-using System.Security.Policy;
 using Rosie.Nutshell.Types.Account;
 using Rosie.Nutshell.Types.Channels;
 using Rosie.Nutshell.Types.Common;
@@ -24,7 +23,7 @@ public class NutshellContact
     public int ContactedCount { get; init; }
     public KeyedAndIndexedSet<NutshellAddress> Address { get; init; }
     public KeyedAndIndexedSet<NutshellPhone> Phone { get; init; }
-    public KeyedAndIndexedSet<Url> Url { get; init; }
+    public KeyedAndIndexedSet<Uri> Url { get; init; }
     public KeyedAndIndexedSet<string> Email { get; init; }
     public NutshellNote[] Notes { get; init; }
     public NutshellEntityStub Territory { get; init; }

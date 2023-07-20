@@ -11,7 +11,6 @@ using Rosie.Nutshell.Types.Task;
 using Rosie.Nutshell.Types.Team;
 using Rosie.Nutshell.Types.Test;
 using Rosie.Nutshell.Types.User;
-using Rosie.Platform.Abstractions.Enumerations;
 
 // ReSharper disable once CheckNamespace
 namespace Rosie.Nutshell;

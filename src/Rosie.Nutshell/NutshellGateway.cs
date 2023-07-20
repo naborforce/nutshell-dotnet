@@ -6,9 +6,6 @@ using Rosie.Nutshell.Secrets;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Endpoint;
 using Rosie.Nutshell.Types.Internal;
-using Rosie.Platform;
-using Rosie.Platform.Abstractions.Enumerations;
-using Rosie.Platform.Factories;
 
 namespace Rosie.Nutshell;
 

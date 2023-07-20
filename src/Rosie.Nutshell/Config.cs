@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Rosie.Nutshell.Secrets;
-using Rosie.Platform;
 
 namespace Rosie.Nutshell;
 

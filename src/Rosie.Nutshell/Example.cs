@@ -1,6 +1,6 @@
+using Rosie.Nutshell.Extensions;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Lead;
-using Rosie.Platform.Extensions;
 
 namespace Rosie.Nutshell;
 

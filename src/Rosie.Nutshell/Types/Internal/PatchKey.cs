@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Rosie.Platform.Abstractions.Enumerations;
+using Rosie.Nutshell.Types.Common;
 
 namespace Rosie.Nutshell.Types.Internal;
 
