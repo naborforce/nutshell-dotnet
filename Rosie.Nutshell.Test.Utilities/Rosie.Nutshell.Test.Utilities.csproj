@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Rosie.Quality" Version="7.92.0" />
+      <PackageReference Include="Rosie.Quality" Version="7.93.1" />
     </ItemGroup>
 
     <ItemGroup>
