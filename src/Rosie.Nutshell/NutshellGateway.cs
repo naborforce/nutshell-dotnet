@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Rosie.Nutshell.Exceptions;
 using Rosie.Nutshell.Secrets;
@@ -104,13 +105,23 @@ internal class NutshellGateway : INutshellGateway
         try
         {
             var response = await httpClient.SendAsync(request);
+            _logger.LogInformation("Response from Nutshell: {@Response}", new
+            {
+                response.ReasonPhrase,
+                response.IsSuccessStatusCode,
+                response.StatusCode,
+                response.Headers
+            });
+            
+            var json = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation("Response content from Nutshell: {Response}", json);
 
             if (!response.IsSuccessStatusCode)
             {
                 throw new NutshellApiException($"Error while calling method `{method}`: {response.ReasonPhrase}");
             }
 
-            var decoded = await response.Content.ReadFromJsonAsync<RpcResponse<TOut>>();
+            var decoded = JsonSerializer.Deserialize<RpcResponse<TOut>>(json);
 
             if (decoded?.Error != null)
             {
