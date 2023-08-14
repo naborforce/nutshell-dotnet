@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace Rosie.Nutshell.Types.Common;
 
 public record FindRequest(

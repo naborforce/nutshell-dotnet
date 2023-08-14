@@ -4,6 +4,6 @@ namespace Rosie.Nutshell.Types.Contact;
 
 public class UniversalSearchResults
 {
-    public NutshellContact[] Contacts { get; init; }
-    public NutshellAccount[] Accounts { get; init; }
+    public NutshellContactStub[] Contacts { get; init; }
+    public NutshellAccountStub[] Accounts { get; init; }
 }

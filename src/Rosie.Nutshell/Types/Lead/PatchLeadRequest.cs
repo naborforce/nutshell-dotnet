@@ -10,7 +10,9 @@ public class PatchLeadRequest : PatchedEntity<PatchLeadRequest, PatchLeadRequest
     {
         string Name { get; }
     }
-    
+
+    public override object GetProjection() => new { lead = base.GetProjection() };
+
     public static class Keys
     {
         public static readonly TypedPatchKey<NutshellEntityId> PrimaryAccount = new("primaryAccount");
@@ -30,9 +32,11 @@ public class PatchLeadRequest : PatchedEntity<PatchLeadRequest, PatchLeadRequest
         public static readonly TypedPatchKey<int?> MilestoneId = new("milestoneId");
         public static readonly TypedPatchKey<int?> StageSetId = new("stagesetId");
     }
-    
+
     public class TypedPatchKey<TValue> : PatchKey<PatchLeadRequest, TValue>, IPatchKey
     {
-        public TypedPatchKey(string name) : base(name) { }
+        public TypedPatchKey(string name) : base(name)
+        {
+        }
     }
 }

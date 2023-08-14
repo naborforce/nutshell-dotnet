@@ -1,4 +1,3 @@
-using Rosie.Nutshell.Types.Channels;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Internal;
 
@@ -10,6 +9,8 @@ public class PatchContactRequest : PatchedEntity<PatchContactRequest, PatchConta
     {
         string Name { get; }
     }
+
+    public override object GetProjection() => new { contact = base.GetProjection() };
 
     public static class Keys
     {

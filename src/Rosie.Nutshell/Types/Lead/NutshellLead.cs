@@ -4,12 +4,9 @@ using Rosie.Nutshell.Types.Contact;
 
 namespace Rosie.Nutshell.Types.Lead;
 
-public class NutshellLead
+public class NutshellLead : NutshellLeadStub
 {
-    public int Id { get; init; }
     public string EntityType { get; init; }
-    public string Rev { get; init; }
-    public string Name { get; init; }
     public string HtmlUrl { get; init; }
     public string AvatarUrl { get; init; }
     public string[] Tags { get; init; }

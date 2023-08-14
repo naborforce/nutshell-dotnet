@@ -6,12 +6,10 @@ using Rosie.Nutshell.Types.Lead;
 
 namespace Rosie.Nutshell.Types.Contact;
 
-public class NutshellContact
+public class NutshellContact : NutshellContactStub
 {
-    public int Id { get; init; }
-    public string EntityType { get; init; }
     public string Rev { get; init; }
-    public NutshellName Name { get; init; }
+    public new NutshellName Name { get; init; }
     public string HtmlUrl { get; init; }
     public string AvatarUrl { get; init; }
     public string Description { get; init; }

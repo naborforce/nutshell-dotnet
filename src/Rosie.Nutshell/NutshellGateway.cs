@@ -1,9 +1,10 @@
 ﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Rosie.Nutshell.Exceptions;
+using Rosie.Nutshell.Extensions;
+using Rosie.Nutshell.Json;
 using Rosie.Nutshell.Secrets;
 using Rosie.Nutshell.Types.Common;
 using Rosie.Nutshell.Types.Endpoint;
@@ -18,6 +19,18 @@ internal class NutshellGateway : INutshellGateway
     private readonly ILogger<NutshellGateway> _logger;
     private readonly AsyncLazy<HttpClient> _client;
     private static readonly Uri _endpointDiscoverUrl = new(Constants.DiscoveryEndpointUri);
+    private static Uri? _endpointUrl;
+    
+    private static readonly JsonSerializerOptions _outputSerializerOptions = new()
+    {
+        PropertyNamingPolicy =  SnakeCaseNamingPolicy.Instance,
+        PropertyNameCaseInsensitive = true
+    };
+    
+    private static readonly JsonSerializerOptions _inputSerializationOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 
     static NutshellGateway() => DotEnv.Load(".env");
 
@@ -56,6 +69,11 @@ internal class NutshellGateway : INutshellGateway
     {
         try
         {
+            if (_endpointUrl is not null)
+            {
+                return _endpointUrl;
+            }
+            
             var request = new GetEndpointRequest(username);
             using var httpClient = _httpClientFactory.CreateClient(nameof(NutshellGateway));
 
@@ -65,7 +83,8 @@ internal class NutshellGateway : INutshellGateway
                 httpClient,
                 _endpointDiscoverUrl);
 
-            return new Uri($"https://{endpoint.Api}/api/v1/json");
+            _endpointUrl = new Uri($"https://{endpoint.Api}/api/v1/json");
+            return _endpointUrl;
         }
         catch(Exception ex)
         {
@@ -116,31 +135,31 @@ internal class NutshellGateway : INutshellGateway
             var json = await response.Content.ReadAsStringAsync();
             _logger.LogInformation("Response content from Nutshell: {Response}", json);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new NutshellApiException($"Error while calling method `{method}`: {response.ReasonPhrase}");
-            }
-
-            var decoded = JsonSerializer.Deserialize<RpcResponse<TOut>>(json);
+            var decoded = JsonSerializer.Deserialize<RpcResponse<TOut>>(json, _outputSerializerOptions);
 
             if (decoded?.Error != null)
             {
                 throw new NutshellApiException(
-                    $"Error while calling method `{method}`: {decoded.Error.Message}",
+                    decoded.Error.Message,
                     decoded.Error.Code,
                     decoded.Error.Data);
             }
 
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new NutshellApiException($"Error while calling method `{method.Name}`: {response.ReasonPhrase}");
+            }
+
             if (decoded is null || decoded.Result is null)
             {
-                throw new NutshellApiException("Error while calling method `{method}`: no response");
+                throw new NutshellApiException($"Error while calling method `{method.Name}`: no response");
             }
 
             return decoded.Result;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while calling method `{Method}`", method);
+            _logger.LogError(ex, "Error while calling method `{Method}`", method.Name);
             throw;
         }
     }
@@ -167,12 +186,14 @@ internal class NutshellGateway : INutshellGateway
             }
 
             request.Method = HttpMethod.Post;
-            request.Content = JsonContent.Create(payload);
+            var json = payload.ToJson(_inputSerializationOptions);
+            _logger.LogInformation("Request to Nutshell: {@Json}", json);
+            request.Content = new StringContent(json, Encoding.UTF8, mediaType: "application/json");
             return request;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while creating request for method `{Method}`", method);
+            _logger.LogError(ex, "Error while creating request for method `{Method}`", method.Name);
             throw;
         }
     }

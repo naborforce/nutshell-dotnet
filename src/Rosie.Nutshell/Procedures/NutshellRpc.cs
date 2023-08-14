@@ -63,7 +63,7 @@ public abstract class NutshellRpc : Enumeration
     public static class Common
     {
         public static readonly NutshellRpc<UniversalSearchResults, SearchRequest> SearchUniversal = new("searchUniversal");
-        public static readonly NutshellRpc<UniversalSearchResults, FindRequest<string>> SearchByEmail = new("searchByEmail");
+        public static readonly NutshellRpc<UniversalSearchResults, EmailAddressQuery> SearchByEmail = new("searchByEmail");
     }
 
     public static class Competitors
@@ -110,7 +110,7 @@ public abstract class NutshellRpc : Enumeration
         public static readonly NutshellRpc<NutshellMilestone[], FindRequest> FindMilestones = new("findMilestones");
         public static readonly NutshellRpc<NutshellLead, PatchLeadRequest> EditLead = new("editLead");
         public static readonly NutshellRpc<NutshellLead, GetLeadRequest> GetLead = new("getLead");
-        public static readonly NutshellRpc<NutshellLead, PatchLeadRequest> NewLead = new("newLead");
+        public static readonly NutshellRpc<NutshellLeadStub, PatchLeadRequest> NewLead = new("newLead");
         public static readonly NutshellRpc<bool, GetLeadRequest> DeleteLead = new("deleteLead");
     }
 

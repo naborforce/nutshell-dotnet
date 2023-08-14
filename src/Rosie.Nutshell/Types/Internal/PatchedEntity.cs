@@ -21,5 +21,5 @@ public abstract class PatchedEntity<TEntity, TKey> : IProjection
         return this is TEntity entity ? entity : throw new InvalidOperationException();
     }
 
-    public object GetProjection() => Values.ToDictionary(v => v.Key, v => v.Value);
+    public virtual object GetProjection() => Values.ToDictionary(v => v.Key, v => v.Value);
 }

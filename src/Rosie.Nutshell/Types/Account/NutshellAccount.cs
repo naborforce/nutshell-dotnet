@@ -5,12 +5,9 @@ using Rosie.Nutshell.Types.Lead;
 
 namespace Rosie.Nutshell.Types.Account;
 
-public class NutshellAccount
+public class NutshellAccount : NutshellAccountStub
 {
-    public int Id { get; set; }
-    public string EntityType { get; set; } = "Accounts";
     public string Rev { get; set; } = null!;
-    public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string LegacyId { get; set; } = null!;
 
