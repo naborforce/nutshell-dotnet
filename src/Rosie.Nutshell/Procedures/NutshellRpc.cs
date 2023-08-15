@@ -18,7 +18,7 @@ namespace Rosie.Nutshell;
 // ReSharper disable once InconsistentNaming
 public abstract class NutshellRpc : Enumeration
 {
-    protected internal NutshellRpc(string name) : base(name)
+    protected NutshellRpc(string name) : base(name)
     {
     }
 
@@ -75,7 +75,7 @@ public abstract class NutshellRpc : Enumeration
     public static class Contacts
     {
         public static readonly NutshellRpc<NutshellContact[], FindRequest> FindContacts = new("findContacts");
-        public static readonly NutshellRpc<NutshellContact, PatchContactRequest> EditContact = new("editContact");
+        public static readonly NutshellRpc<NutshellContact, EditContactRequest> EditContact = new("editContact");
         public static readonly NutshellRpc<NutshellContact, PatchContactRequest> NewContact = new("newContact");
         public static readonly NutshellRpc<NutshellContact, GetContactRequest> GetContact = new("getContact");
         public static readonly NutshellRpc<NutshellContact[], SearchRequest> SearchContacts = new("searchContacts");
@@ -108,7 +108,7 @@ public abstract class NutshellRpc : Enumeration
     {
         public static readonly NutshellRpc<NutshellLead[], FindLeadsRequest> FindLeads = new("findLeads");
         public static readonly NutshellRpc<NutshellMilestone[], FindRequest> FindMilestones = new("findMilestones");
-        public static readonly NutshellRpc<NutshellLead, PatchLeadRequest> EditLead = new("editLead");
+        public static readonly NutshellRpc<NutshellLead, EditLeadRequest> EditLead = new("editLead");
         public static readonly NutshellRpc<NutshellLead, GetLeadRequest> GetLead = new("getLead");
         public static readonly NutshellRpc<NutshellLeadStub, PatchLeadRequest> NewLead = new("newLead");
         public static readonly NutshellRpc<bool, GetLeadRequest> DeleteLead = new("deleteLead");
