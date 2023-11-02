@@ -26,6 +26,7 @@ public class PatchLeadRequest : PatchedEntity<PatchLeadRequest, PatchLeadRequest
         public static readonly TypedPatchKey<NutshellEntityStub[]> Competitors = new("competitors");
         public static readonly TypedPatchKey<NutshellEntityRevision[]> Sources = new("sources");
         public static readonly TypedPatchKey<string?> Note = new("note");
+        public static readonly TypedPatchKey<int> Status = new("status");
         public static readonly TypedPatchKey<Dictionary<string, string>> CustomFields = new("customFields");
         public static readonly TypedPatchKey<string?> Priority = new("priority");
         public static readonly TypedPatchKey<bool> IsPending = new("isPending");
